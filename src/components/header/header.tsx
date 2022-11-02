@@ -11,7 +11,7 @@ const Header: React.FC = () => {
         <p style={{ fontSize: 12, fontWeight: 'bold' }}>Lap 3</p>
       </div>
       <div>
-        <img src={logo} style={{ width: '200px' }} />
+        <img src={logo} style={{ width: '18vw' }} />
       </div>
       <div style={{ textAlign: 'left' }}>
         <p style={{ fontWeight: 'bold' }}>

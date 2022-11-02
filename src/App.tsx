@@ -8,11 +8,15 @@ import Indicators from './components/indicators/indicators';
 
 export const App: React.FC = () => {
   const [view, setView] = React.useState(false);
+
   return (
     <div className="App">
       <Header />
       {view ? <Digital /> : <Analog />}
-      <button style={{ color: '#000' }} onClick={() => setView(!view)}>
+      <button
+        style={{ color: '#000', position: 'absolute', top: '15vh' }}
+        onClick={() => setView(!view)}
+      >
         switch
       </button>
       <Indicators />

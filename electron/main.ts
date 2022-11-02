@@ -1,4 +1,7 @@
-import { app, BrowserWindow, ipcMain } from 'electron';
+import dotenv from 'dotenv';
+dotenv.config();
+import { app, BrowserWindow } from 'electron';
+import { mqttInit } from './mqtt';
 
 let mainWindow: BrowserWindow | null;
 
@@ -29,21 +32,16 @@ function createWindow() {
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
-}
 
-async function registerListeners() {
-  /**
-   * This comes from bridge integration, check bridge.ts
-   */
-  ipcMain.on('message', (_, message) => {
-    console.log(message);
-  });
+  mainWindow.webContents.send('temp', 1123);
+
+  return mainWindow.webContents;
 }
 
 app
-  .on('ready', createWindow)
   .whenReady()
-  .then(registerListeners)
+  .then(createWindow)
+  .then(mqttInit)
   .catch((e) => console.error(e));
 
 app.on('window-all-closed', () => {
