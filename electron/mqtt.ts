@@ -1,5 +1,6 @@
 import { ipcMain } from 'electron';
 import mqtt from 'mqtt';
+import payloadType from './payload.type';
 
 const host = 'mqtt://broker.emqx.io:1883';
 
@@ -22,11 +23,6 @@ const options: mqtt.IClientOptions = {
   rejectUnauthorized: false,
 };
 
-type payloadType = {
-  sensor: string;
-  data: string | number;
-};
-
 export async function mqttInit(webContents: Electron.WebContents) {
   const client = mqtt.connect(host, options);
 
@@ -46,16 +42,10 @@ export async function mqttInit(webContents: Electron.WebContents) {
     });
   });
 
-  webContents.on('did-finish-load', () => {
-    client.on('message', (_topic, message) => {
-      const payload: payloadType = JSON.parse(message.toString());
-      console.log(payload);
+  client.on('message', (_topic, message) => {
+    const payload: payloadType = JSON.parse(message.toString());
+    console.log(payload);
 
-      webContents.send(payload.sensor, payload.data);
-    });
-  });
-
-  ipcMain.on('message', (_, message) => {
-    console.log(message);
+    webContents.send(payload.type, payload.data);
   });
 }
