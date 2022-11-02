@@ -8,7 +8,7 @@ import Header from './components/header/header';
 import Indicators from './components/indicators/indicators';
 
 export const App: React.FC = () => {
-  const [view, setView] = React.useState(true);
+  const [view, setView] = React.useState(false);
 
   const [metrics, setMetrics] = React.useState<metricsPayloadDataType>({
     speed: 0,
@@ -28,7 +28,7 @@ export const App: React.FC = () => {
   return (
     <div className="App">
       <Header />
-      {view ? <Digital {...metrics} /> : <Analog />}
+      {view ? <Digital {...metrics} /> : <Analog {...metrics} />}
       <button
         style={{ color: '#000', position: 'absolute', top: '15vh' }}
         onClick={() => setView(!view)}

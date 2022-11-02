@@ -7,59 +7,93 @@
 }
 
 .Meter {
-  /* background-color: red; */
-  width: 32vw;
-  height: 32vw;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  background-color: #00000062;
+  padding-top: 50px;
 }
 
 .SpeedMeterShadow {
-  box-shadow: 0px 0px 30px #29a7e228;
+  filter: drop-shadow(0px 0px 15px #29a7e254);
 }
 
 .BatteryMeterShadow {
-  box-shadow: 0px 0px 30px #0f217028;
+  filter: drop-shadow(0px 0px 15px #0f217067);
 }
 
-.SpeedMeterValue {
-  font-size: 16vw;
-  color: #29a7e2;
-  font-weight: bold;
-}
-
-.BatteryMeterValue {
-  font-size: 16vw;
-  color: #0f2070;
-  font-weight: bold;
-}
-
-.MeterTitle {
-  font-size: 2vw;
-}
-
-.Metrics {
-  width: 23vw;
-  height: 23vw;
+.MetricsContainer {
+  padding: 2vw 2vw;
   border-radius: 25px;
   background-color: #00000062;
   box-shadow: 0px 0px 30px #29a7e228;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+}
+.Metrics {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 15px;
 }
 
-.MetricsValue {
-  font-size: 4vw;
-  color: #047dce;
-  font-weight: bold;
+.MetricsValues {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.MetricsValues span {
+  font-size: 12px;
+  color: #999999;
 }
 
 .MetricsTitle {
-  font-size: 1vw;
+  font-size: 12px;
+}
+
+.progress {
+  background-color: #00000062;
+  border-radius: 4px;
+  box-shadow: 0px 0px 20px #29a7e228;
+}
+
+.progress.horizontal {
+  position: relative;
+  width: 28px;
+  height: 25vh;
+  display: flex;
+  transform: rotate(90deg);
+}
+
+.progress.vertical {
+  position: relative;
+  width: 28px;
+  height: 25vh;
+  display: flex;
+  margin-left: 10px;
+}
+
+.progress.vertical > .progressBar {
+  width: 100% !important;
+  position: absolute;
+  bottom: 0;
+}
+
+.progressBar {
+  float: left;
+  width: 0;
+  height: 100%;
+  text-align: center;
+}
+
+.SkyblueColor {
+  background-color: #29a7e2;
+}
+
+.SkyblueShadow {
+  box-shadow: 0px 0px 20px #29a7e228;
+}
+
+.DarkblueColor {
+  background-color: #0f2070;
+}
+
+.DarkblueShadow {
+  box-shadow: 0px 0px 20px #0f217067;
 }
