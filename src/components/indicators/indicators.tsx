@@ -7,22 +7,13 @@ import seatbeltIcon from '../../../assets/seatbelt.png';
 import tempIcon from '../../../assets/temp.png';
 import { indicatorPayloadDataType } from '../../../electron/payload.type';
 
-const Indicators: React.FC = () => {
-  const [{ doors, seatbelt, smoke, temp }, setIndicators] =
-    React.useState<indicatorPayloadDataType>({
-      doors: false,
-      seatbelt: false,
-      smoke: false,
-      temp: false,
-    });
-
+const Indicators: React.FC<indicatorPayloadDataType> = ({
+  doors,
+  seatbelt,
+  smoke,
+  temp,
+}) => {
   const { Indicator, IndicatorDisabled } = styles;
-
-  React.useEffect(() => {
-    window.Main.on('indicators', (data: indicatorPayloadDataType) =>
-      setIndicators(data)
-    );
-  }, []);
 
   return (
     <div className={styles.Indicators}>

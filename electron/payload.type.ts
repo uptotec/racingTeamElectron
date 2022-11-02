@@ -14,6 +14,8 @@ export type metricsPayloadDataType = {
   range: number;
 };
 
+export type viewPayloadDataType = 'analog' | 'digital' | 'camera';
+
 type payloadType =
   | {
       type: 'metrics';
@@ -22,6 +24,10 @@ type payloadType =
   | {
       type: 'indicators';
       data: indicatorPayloadDataType;
+    }
+  | {
+      type: 'view';
+      data: viewPayloadDataType;
     };
 
 export default payloadType;

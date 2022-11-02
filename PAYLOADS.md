@@ -2,11 +2,12 @@
 
 all data between sensors and screen will be sent throw MQTT Broker on a single channel called **`BueRacingTeam`** and depending on the payload the screen state will change.
 
-there is three type of payloads
+there is four type of payloads
 
 1. metrics payload
 2. indicators payload
 3. laps payload
+4. view payload
 
 all payloads will be in **_JSON format_** and will follow the following structure while changing the data object type.
 
@@ -82,5 +83,27 @@ example
     "temp": false,
     "smoke": true
   }
+}
+```
+
+## 3. Laps Payload
+
+## 4. View Payload
+
+this payload will update all view on the screen between digital, analog and camera. the payload structure as follow.
+
+```typescript
+{
+  type: 'view';
+  data: 'analog' | 'digital' | 'camera';
+}
+```
+
+example
+
+```JSON
+{
+  "type": "view",
+  "data": 'analog'
 }
 ```

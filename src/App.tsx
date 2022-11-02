@@ -1,14 +1,20 @@
 import * as React from 'react';
-import { metricsPayloadDataType } from '../electron/payload.type';
+import Webcam from 'react-webcam';
 
 import './App.css';
+import {
+  indicatorPayloadDataType,
+  metricsPayloadDataType,
+  viewPayloadDataType,
+} from '../electron/payload.type';
 import Analog from './components/analog/analog';
 import Digital from './components/digital/digital';
 import Header from './components/header/header';
 import Indicators from './components/indicators/indicators';
 
 export const App: React.FC = () => {
-  const [view, setView] = React.useState(false);
+  const [analog, setAnalog] = React.useState(false);
+  const [camera, setCamera] = React.useState(false);
 
   const [metrics, setMetrics] = React.useState<metricsPayloadDataType>({
     speed: 0,
@@ -19,23 +25,49 @@ export const App: React.FC = () => {
     range: 0,
   });
 
+  const [indicators, setIndicators] = React.useState<indicatorPayloadDataType>({
+    doors: false,
+    seatbelt: false,
+    smoke: false,
+    temp: false,
+  });
+
   React.useEffect(() => {
     window.Main.on('metrics', (data: metricsPayloadDataType) =>
       setMetrics(data)
+    );
+
+    window.Main.on('view', (data: viewPayloadDataType) => {
+      switch (data) {
+        case 'analog':
+          setCamera(false);
+          setAnalog(true);
+          break;
+        case 'digital':
+          setCamera(false);
+          setAnalog(false);
+          break;
+        case 'camera':
+          setCamera(true);
+      }
+    });
+
+    window.Main.on('indicators', (data: indicatorPayloadDataType) =>
+      setIndicators(data)
     );
   }, []);
 
   return (
     <div className="App">
-      <Header />
-      {view ? <Digital {...metrics} /> : <Analog {...metrics} />}
-      <button
-        style={{ color: '#000', position: 'absolute', top: '15vh' }}
-        onClick={() => setView(!view)}
-      >
-        switch
-      </button>
-      <Indicators />
+      {camera ? (
+        <Webcam width={window.innerWidth} height={window.innerHeight} />
+      ) : (
+        <>
+          <Header />
+          {analog ? <Analog {...metrics} /> : <Digital {...metrics} />}
+          <Indicators {...indicators} />
+        </>
+      )}
     </div>
   );
 };
