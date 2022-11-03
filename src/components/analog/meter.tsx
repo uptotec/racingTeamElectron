@@ -1,5 +1,11 @@
 import * as React from 'react';
-import Speedometer, { Arc, Needle, Progress, Marks } from 'react-speedometer';
+import Speedometer, {
+  Arc,
+  Needle,
+  Progress,
+  Marks,
+  Indicator,
+} from 'react-speedometer';
 
 function getWindowSize() {
   const { innerWidth, innerHeight } = window;
@@ -50,6 +56,21 @@ const Meter: React.FC<{ value: number; type: 'b' | 's' }> = ({
         fontSize={windowSize.innerWidth * 0.01}
         step={type === 's' ? 10 : 5}
       />
+      <Indicator>
+        {(textValue, props) => (
+          <text
+            {...props}
+            fontSize={windowSize.innerWidth * 0.02}
+            fill="#fff"
+            x={(windowSize.innerWidth * 0.32) / 2}
+            y={windowSize.innerHeight * 0.5}
+            textAnchor="middle"
+            fontFamily="squada-one"
+          >
+            {type === 's' ? 'Speed' : 'Battery'}
+          </text>
+        )}
+      </Indicator>
     </Speedometer>
   );
 };

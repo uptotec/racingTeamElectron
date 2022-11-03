@@ -104,6 +104,6 @@ example
 ```JSON
 {
   "type": "view",
-  "data": 'analog'
+  "data": "analog"
 }
 ```

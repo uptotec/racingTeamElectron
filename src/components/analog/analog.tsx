@@ -28,19 +28,19 @@ const Analog: React.FC<metricsPayloadDataType> = ({
           }}
         >
           <VerticalProgress
-            progress={(voltage / 10) * 100}
-            endValue={10}
-            title="voltage"
+            progress={(voltage / 20) * 100}
+            endValue={20}
+            title="Voltage"
           />
           <VerticalProgress
             progress={(current / 100) * 100}
             endValue={100}
-            title="current"
+            title="Current"
           />
         </div>
         <HorizontalProgress
-          progress={(temp / 100) * 100}
-          endValue={100}
+          progress={(temp / 200) * 100}
+          endValue={200}
           title="Temprature"
         />
       </div>

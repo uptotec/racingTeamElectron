@@ -13,7 +13,7 @@ import Header from './components/header/header';
 import Indicators from './components/indicators/indicators';
 
 export const App: React.FC = () => {
-  const [analog, setAnalog] = React.useState(false);
+  const [analog, setAnalog] = React.useState(true);
   const [camera, setCamera] = React.useState(false);
 
   const [metrics, setMetrics] = React.useState<metricsPayloadDataType>({
